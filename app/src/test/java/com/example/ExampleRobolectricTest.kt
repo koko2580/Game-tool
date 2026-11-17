@@ -1,14 +1,20 @@
 package com.example
 
+import android.app.Activity
 import android.content.Context
+import android.content.Intent
 import androidx.test.core.app.ApplicationProvider
 import com.example.data.system.DeviceTelemetryManager
 import com.example.data.system.SystemSettingsNavigator
+import com.example.turbo.ScreenCaptureService
 import org.junit.Assert.assertEquals
+import org.junit.Assert.assertNotNull
 import org.junit.Assert.assertTrue
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.robolectric.Robolectric
 import org.robolectric.RobolectricTestRunner
+import org.robolectric.Shadows.shadowOf
 import org.robolectric.annotation.Config
 
 @RunWith(RobolectricTestRunner::class)
@@ -52,5 +58,21 @@ class ExampleRobolectricTest {
         assertTrue(ids.contains("sound_settings"))
         assertTrue(ids.contains("animation_settings"))
         assertTrue(ids.contains("device_info"))
+    }
+
+    @Test
+    fun `screen capture service calls startForeground when launched with RESULT_OK`() {
+        val context = ApplicationProvider.getApplicationContext<Context>()
+        val intent = ScreenCaptureService.buildScreenshotIntent(
+            context = context,
+            resultCode = Activity.RESULT_OK,
+            data = Intent("test.PROJECTION_GRANTED")
+        )
+        val controller = Robolectric.buildService(ScreenCaptureService::class.java, intent)
+            .create()
+            .startCommand(0, 0)
+        val service = controller.get()
+        assertNotNull(shadowOf(service).lastForegroundNotification)
+        controller.destroy()
     }
 }

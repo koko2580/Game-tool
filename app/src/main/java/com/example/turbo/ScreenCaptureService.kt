@@ -1,5 +1,6 @@
 package com.example.turbo
 
+import android.app.Activity
 import android.app.Notification
 import android.app.NotificationChannel
 import android.app.NotificationManager
@@ -75,7 +76,7 @@ class ScreenCaptureService : Service() {
                 return START_NOT_STICKY
             }
             ACTION_START_RECORD, ACTION_SCREENSHOT -> {
-                val resultCode = intent.getIntExtra(EXTRA_RESULT_CODE, -1)
+                val resultCode = intent.getIntExtra(EXTRA_RESULT_CODE, Activity.RESULT_CANCELED)
                 val consentData: Intent? = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
                     intent.getParcelableExtra(EXTRA_CONSENT_DATA, Intent::class.java)
                 } else {
@@ -83,17 +84,27 @@ class ScreenCaptureService : Service() {
                     intent.getParcelableExtra(EXTRA_CONSENT_DATA)
                 }
 
-                if (consentData == null || resultCode == -1) {
+                if (consentData == null || resultCode != Activity.RESULT_OK) {
                     controller.updateRecording(false, error = "Invalid screen capture consent.")
                     stopSelf()
                     return START_NOT_STICKY
                 }
 
                 val isRecord = intent.action == ACTION_START_RECORD
-                startForegroundCompat(isRecord)
+                val fgsStarted = runCatching {
+                    startForegroundCompat(isRecord)
+                    true
+                }.onFailure { err ->
+                    controller.updateRecording(
+                        false,
+                        error = err.localizedMessage ?: "Screen capture foreground service permission denied."
+                    )
+                    stopSelf()
+                }.getOrDefault(false)
+                if (!fgsStarted) return START_NOT_STICKY
 
                 val mgr = getSystemService(Context.MEDIA_PROJECTION_SERVICE) as? MediaProjectionManager
-                val projection = mgr?.getMediaProjection(resultCode, consentData)
+                val projection = runCatching { mgr?.getMediaProjection(resultCode, consentData) }.getOrNull()
                 if (projection == null) {
                     controller.updateRecording(false, error = "MediaProjection unavailable.")
                     stopSelf()
@@ -167,8 +178,10 @@ class ScreenCaptureService : Service() {
                 )
             } finally {
                 image.close()
-                releaseResources(notifyError = null)
-                stopSelf()
+                captureHandler.post {
+                    releaseResources(notifyError = null)
+                    stopSelf()
+                }
             }
         }, captureHandler)
 
@@ -270,20 +283,30 @@ class ScreenCaptureService : Service() {
 
     private fun finalizeRecordingAndStop() {
         val wasRecording = controller.captureState.value.isRecordingScreen
-        runCatching { mediaRecorder?.stop() }
+        val stopResult = runCatching { mediaRecorder?.stop() }
+        val savedValidVideo = stopResult.isSuccess
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
             activeVideoUri?.let { uri ->
-                val doneValues = ContentValues().apply {
-                    put(MediaStore.Video.Media.IS_PENDING, 0)
+                if (savedValidVideo) {
+                    val doneValues = ContentValues().apply {
+                        put(MediaStore.Video.Media.IS_PENDING, 0)
+                    }
+                    runCatching { contentResolver.update(uri, doneValues, null, null) }
+                } else {
+                    runCatching { contentResolver.delete(uri, null, null) }
                 }
-                runCatching { contentResolver.update(uri, doneValues, null, null) }
             }
         }
         releaseResources(notifyError = null)
-        if (wasRecording) {
+        if (wasRecording && savedValidVideo) {
             controller.updateRecording(
                 recording = false,
                 savedMessage = "Screen recording saved to Movies/NEXORA_X"
+            )
+        } else if (wasRecording) {
+            controller.updateRecording(
+                recording = false,
+                error = "Recording stopped too quickly to save."
             )
         } else {
             controller.updateRecording(recording = false)
