@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">NEXORA X</string>
+    <string name="app_subtitle">Precision Gaming Control Center</string>
+
+    <!-- Navigation -->
+    <string name="nav_dashboard">Dashboard</string>
+    <string name="nav_games">Games</string>
+    <string name="nav_monitor">Monitor</string>
+    <string name="nav_shortcuts">Shortcuts</string>
+    <string name="nav_labs">Labs</string>
+    <string name="nav_settings">Settings</string>
+    <string name="cd_open_settings">Open Settings</string>
+    <string name="cd_navigate_back">Navigate back</string>
+
+    <!-- Dashboard -->
+    <string name="dashboard_title">Control Center</string>
+    <string name="dashboard_device_section">Device Identity</string>
+    <string name="dashboard_telemetry_section">Live System Telemetry</string>
+    <string name="dashboard_quick_actions">Quick Utility Shortcuts</string>
+    <string name="dashboard_recent_games">Recent Launches</string>
+    <string name="dashboard_ram_title">System Memory</string>
+    <string name="dashboard_battery_title">Battery &amp; Power</string>
+    <string name="dashboard_thermal_title">Thermal State</string>
+    <string name="dashboard_display_title">Display Refresh</string>
+    <string name="dashboard_available_fmt">%1$s free</string>
+    <string name="dashboard_total_fmt">of %1$s total</string>
+    <string name="dashboard_charging">Charging</string>
+    <string name="dashboard_discharging">On Battery</string>
+    <string name="dashboard_full">Fully Charged</string>
+    <string name="dashboard_hyperos_badge">HyperOS / MIUI</string>
+    <string name="dashboard_no_root_badge">No-Root Native API</string>
+
+    <!-- Game Center -->
+    <string name="games_title">Game Center</string>
+    <string name="games_search_hint">Search installed apps &amp; games</string>
+    <string name="games_filter_detected">Detected Games</string>
+    <string name="games_filter_favorites">Favorites</string>
+    <string name="games_filter_all">All Apps</string>
+    <string name="games_launch">Launch</string>
+    <string name="games_empty_title">No Matching Apps Found</string>
+    <string name="games_empty_subtitle">Try switching to All Apps or clearing your search filter. Package visibility uses Android launcher intent queries without broad storage access.</string>
+    <string name="games_recent_header">Recently Launched</string>
+    <string name="games_profile_title">Pre-Launch Profile</string>
+    <string name="games_profile_refresh_note">Target Refresh Note</string>
+    <string name="games_profile_brightness_hint">Brightness Checklist</string>
+    <string name="games_profile_dnd_reminder">Remind to enable Do Not Disturb</string>
+    <string name="games_profile_save">Save Profile</string>
+    <string name="games_launch_failed">Unable to launch %1$s on this device.</string>
+
+    <!-- Hidden Settings -->
+    <string name="shortcuts_title">Hidden Settings</string>
+    <string name="shortcuts_subtitle">Direct Android system panel launchers with availability verification</string>
+    <string name="shortcuts_hyperos_notice">Xiaomi HyperOS / MIUI Notice: Some system activities such as Developer Options or Animation Scales may require manual unlock or restrict third-party deep links. Unsupported actions fall back safely.</string>
+    <string name="shortcuts_supported">Available</string>
+    <string name="shortcuts_fallback">Fallback / Restricted</string>
+    <string name="shortcuts_open">Open</string>
+    <string name="shortcuts_launch_error">This system panel is restricted or unavailable on your Android build.</string>
+    <string name="shortcuts_fallback_opened">Direct panel unavailable; opened main System Settings instead.</string>
+
+    <!-- Performance Monitor -->
+    <string name="monitor_title">Performance Monitor</string>
+    <string name="monitor_live_status">Live Sampling Active</string>
+    <string name="monitor_paused_status">Paused in Background</string>
+    <string name="monitor_ram_chart">Memory Allocation History</string>
+    <string name="monitor_battery_chart">Battery Temperature History</string>
+    <string name="monitor_cpu_section">CPU Hardware &amp; ABI</string>
+    <string name="monitor_thermal_section">Thermal &amp; Power</string>
+    <string name="monitor_network_section">Active Network Link</string>
+    <string name="monitor_disclaimer">All metrics are read directly from Android system APIs (ActivityManager, BatteryManager, PowerManager, DisplayManager, ConnectivityManager). Restricted kernel nodes are marked Unavailable rather than estimated.</string>
+
+    <!-- Labs -->
+    <string name="labs_network_tab">Network Lab</string>
+    <string name="labs_display_tab">Display Lab</string>
+    <string name="network_title">Network Lab</string>
+    <string name="network_probe_title">HTTP Latency Probe</string>
+    <string name="network_probe_button">Run HTTP Probe</string>
+    <string name="network_probe_running">Measuring...</string>
+    <string name="network_probe_disclaimer">Measures real HTTPS TCP/TLS/HTTP round-trip latency to public endpoints. This is NOT UDP/ICMP game-server ping and does not claim artificial ping reduction.</string>
+    <string name="display_title">Display Lab</string>
+    <string name="display_brightness_title">System Brightness Control</string>
+    <string name="display_permission_required">Official Modify System Settings permission (WRITE_SETTINGS) is required to adjust system brightness.</string>
+    <string name="display_grant_permission">Grant Brightness Permission</string>
+    <string name="display_animation_title">Animation Scale Limitations</string>
+    <string name="display_animation_explanation">Non-root apps cannot silently alter global Window/Transition/Animator duration scales (requires WRITE_SECURE_SETTINGS via ADB or system signature). Use the verified shortcuts below to adjust animations natively.</string>
+
+    <!-- Settings -->
+    <string name="settings_title">Settings</string>
+    <string name="settings_appearance">Appearance &amp; Motion</string>
+    <string name="settings_theme">Color Theme</string>
+    <string name="settings_language">Language</string>
+    <string name="settings_haptics">Haptic Feedback</string>
+    <string name="settings_reduced_motion">Reduce Motion Animations</string>
+    <string name="settings_permissions">Permission Manager</string>
+    <string name="settings_privacy">Privacy &amp; Architecture</string>
+    <string name="settings_about">About NEXORA X</string>
+
+    <!-- Status & Common -->
+    <string name="status_unavailable">Unavailable</string>
+    <string name="status_granted">Granted</string>
+    <string name="status_not_granted">Not Granted</string>
+    <string name="status_install_time">Install-Time</string>
+
+    <!-- Game Turbo -->
+    <string name="turbo_title">Game Turbo</string>
+    <string name="turbo_badge">TURBO</string>
+    <string name="turbo_session_active">Active Session</string>
+    <string name="turbo_session_idle">Ready for Session</string>
+    <string name="turbo_start_session">Start Session</string>
+    <string name="turbo_end_session">End Session</string>
+    <string name="turbo_profiles_title">Performance Profiles</string>
+    <string name="turbo_profiles_disclaimer">App-level behavior profiles adjust live telemetry polling cadence and UI animation intensity via DataStore. Non-root apps cannot overclock CPU/GPU frequencies.</string>
+    <string name="turbo_sidebar_title">Floating Gaming Sidebar</string>
+    <string name="turbo_sidebar_desc">Optional floating edge panel over games with session timer, battery, thermal status, brightness, DND, screenshot, and MediaProjection recording.</string>
+    <string name="turbo_tools_title">Gaming Tools &amp; DND</string>
+    <string name="turbo_history_title">Session History</string>
+    <string name="turbo_history_empty">No completed gaming sessions yet. Launch a game or start a Turbo session to record duration and profile history.</string>
+</resources>

@@ -1,0 +1,8 @@
+{
+  "name": "NEXORA X",
+  "description": "Precision Android Gaming Control Center with real-time system telemetry, installed game launcher, hidden settings shortcuts, performance charts, network latency diagnostics, and display inspection.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

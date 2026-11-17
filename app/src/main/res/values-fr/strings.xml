@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">NEXORA X</string>
+    <string name="nav_dashboard">Tableau</string>
+    <string name="nav_games">Jeux</string>
+    <string name="nav_monitor">Moniteur</string>
+    <string name="nav_shortcuts">Raccourcis</string>
+    <string name="nav_labs">Labos</string>
+    <string name="nav_settings">Paramètres</string>
+    <string name="dashboard_telemetry_section">Télémétrie système en direct</string>
+    <string name="dashboard_quick_actions">Raccourcis rapides</string>
+    <string name="dashboard_ram_title">Mémoire système</string>
+    <string name="dashboard_battery_title">Batterie &amp; énergie</string>
+    <string name="dashboard_thermal_title">État thermique</string>
+    <string name="dashboard_display_title">Taux de rafraîchissement</string>
+    <string name="games_title">Centre de jeux</string>
+    <string name="games_launch">Lancer</string>
+    <string name="shortcuts_title">Paramètres cachés</string>
+    <string name="shortcuts_open">Ouvrir</string>
+    <string name="monitor_title">Moniteur de performances</string>
+    <string name="settings_title">Paramètres</string>
+    <string name="settings_theme">Thème de couleur</string>
+    <string name="settings_language">Langue</string>
+    <string name="settings_haptics">Retour haptique</string>
+    <string name="settings_reduced_motion">Réduire les animations</string>
+    <string name="settings_permissions">Gestionnaire de permissions</string>
+</resources>
